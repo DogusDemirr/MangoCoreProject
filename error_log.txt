@@ -1,0 +1,7 @@
+12/14/2023 4:24:52 PM - Hata oluştu :
+12/14/2023 4:24:52 PM - Hata oluştu :
+   at System.Linq.ThrowHelper.ThrowNoElementsException()
+   at lambda_method13(Closure, QueryContext)
+   at Microsoft.EntityFrameworkCore.Query.Internal.QueryCompiler.Execute[TResult](Expression query)
+   at Microsoft.EntityFrameworkCore.Query.Internal.EntityQueryProvider.Execute[TResult](Expression expression)
+   at Mango.Services.CouponAPI.Controllers.CouponAPIController.Get(Int32 id) in C:\Users\dogus\OneDrive\Masaüstü\coreProject\Mango\Mango.Services.CouponAPI\Controllers\CouponAPIController.cs:line 51
