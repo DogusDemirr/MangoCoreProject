@@ -2,9 +2,7 @@
 {
     public class Constant
     {
+        public const string STATIC_FILE_NAME = @"error_log.txt";
 
-        public const string FILE_PATH = @"C:\Users\dogus\OneDrive\Masaüstü\coreProject\Mango";
-
-       
     }
 }

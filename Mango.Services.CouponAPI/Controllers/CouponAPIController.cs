@@ -34,8 +34,7 @@ namespace Mango.Services.CouponAPI.Controllers
             {
                 _response.IsSuccess = false;
                 string logMessage = $"Hata oluştu :{_response.Message}";
-                string logFolderPath = Constant.FILE_PATH;
-                string logFilePath = Path.Combine(logFolderPath, "error_log.txt");
+                string logFilePath = Path.GetFullPath(Constant.STATIC_FILE_NAME);
 
                 using (StreamWriter writer = new StreamWriter(logFilePath, true))
                 {
@@ -58,12 +57,12 @@ namespace Mango.Services.CouponAPI.Controllers
             catch (Exception ex)
             {
                 _response.IsSuccess = false;
+                _response.Message = ex.Message;
                 string logMessage = $"Hata oluştu :{_response.Message}";
-                string logFolderPath = Constant.FILE_PATH;
-                string logFilePath = Path.Combine(logFolderPath, "error_log.txt");
+                string logFilePath = Path.GetFullPath(Constant.STATIC_FILE_NAME);
 
                 using (StreamWriter writer = new StreamWriter(logFilePath, true))
-                {
+                {   
                     writer.WriteLine($"{DateTime.Now} - {logMessage}\n{ex.StackTrace}");
                 }
             }
