@@ -1,13 +1,29 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Newtonsoft.Json;
+using Mango.Web.Models;
+using Microsoft.AspNetCore.Mvc;
+using Mango.Web.Service.IService;
 
 namespace Mango.Web.Controllers
 {
     public class CouponController : Controller
     {
-        //ToDo : Umut ICouponService çağırılarak CouponIndex Metodu oluşturulmalı
-        public IActionResult Index()
+
+        private readonly ICouponService _couponService;
+        
+        public CouponController(ICouponService couponService)
         {
-            return View();
+            _couponService = couponService;
+        }
+        public  async Task<IActionResult> CouponIndex()
+        {
+            List<CouponDto>? list = new();
+            ResponseDto? response = await _couponService.GetAllCouponsAsync();
+
+            if(response !=null && response.IsSuccess)
+            {
+                list = JsonConvert.DeserializeObject<List<CouponDto>>(Convert.ToString(response.Result));
+            }
+            return View(list);
         }
     }
 }
