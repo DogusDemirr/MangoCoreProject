@@ -12,17 +12,17 @@ namespace Mango.Web.Models
         /// <summary>
         /// Url
         /// </summary>
-        public string Url { get; set; }
+        public string? Url { get; set; }
 
         /// <summary>
         /// Data
         /// </summary>
-        public object Data { get; set; }
+        public object? Data { get; set; }
 
         /// <summary>
         /// AccessToken
         /// </summary>
-        public string AccessToken { get; set; } 
+        public string? AccessToken { get; set; } 
 
     }
 }

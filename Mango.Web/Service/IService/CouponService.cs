@@ -7,7 +7,7 @@ namespace Mango.Web.Service.IService
     {
         private readonly IBaseService _baseService;
         
-        public  CouponService(IBaseService baseService)
+        public CouponService(IBaseService baseService)
         {
             _baseService = baseService;
         }
@@ -18,8 +18,8 @@ namespace Mango.Web.Service.IService
             {
                 ApiType = ApiType.POST,
                 Data = couponDto,
-                Url = CouponAPIBase + "/api/coupon"
-            });
+				Url = $"{CouponAPIBase.TrimEnd('/')}/api/coupon"
+			});
         }
 
         public async Task<ResponseDto?> DeleteCouponsAsync(int id)
@@ -27,8 +27,8 @@ namespace Mango.Web.Service.IService
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = ApiType.DELETE,
-                Url = CouponAPIBase + "/api/coupon" + id
-            });
+				Url = $"{CouponAPIBase.TrimEnd('/')}/api/coupon/{id}"
+			});
         }
 
         public async Task<ResponseDto?> GetAllCouponsAsync()
@@ -36,8 +36,8 @@ namespace Mango.Web.Service.IService
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = ApiType.GET,
-                Url = CouponAPIBase + "/api/coupon"
-            });
+				Url = $"{CouponAPIBase.TrimEnd('/')}/api/coupon"
+		});
         }
 
         public async Task<ResponseDto?> GetCouponAsync(string couponCode)
@@ -45,7 +45,7 @@ namespace Mango.Web.Service.IService
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = ApiType.GET,
-                Url = CouponAPIBase + "/api/coupon/GetByCode" + couponCode
+                Url = CouponAPIBase + "/api/coupon/GetByCode/" + couponCode 
             });
         }
 
@@ -54,8 +54,8 @@ namespace Mango.Web.Service.IService
             return await _baseService.SendAsync(new RequestDto()
             {
                 ApiType = ApiType.GET,
-                Url = CouponAPIBase + "/api/coupon" + id
-            });
+				Url = $"{CouponAPIBase.TrimEnd('/')}/api/coupon/{id}"
+			});
         }
 
         public async Task<ResponseDto?> UpdateCouponsAsync(CouponDto couponDto)
