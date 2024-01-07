@@ -16,6 +16,6 @@ namespace Mango.Services.AuthAPI.Service.IService
 		/// </summary>
 		/// <param name="loginRequestDto"></param>
 		/// <returns></returns>
-		Task<LoginRequestDto> Login(LoginRequestDto loginRequestDto);
+		Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto);
 	}
 }
