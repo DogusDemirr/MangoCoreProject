@@ -3,8 +3,9 @@ using System.Text;
 using Newtonsoft.Json;
 using Mango.Web.Models;
 using static Mango.Web.Utility.SD;
+using Mango.Web.Service.IService;
 
-namespace Mango.Web.Service.IService
+namespace Mango.Web.Service
 {
 	/// <summary>
 	/// BaseService

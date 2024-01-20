@@ -1,20 +1,20 @@
 ﻿using System.Text;
 using System.Security.Claims;
+using Microsoft.Extensions.Options;
 using Mango.Services.AuthAPI.Models;
+using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using Mango.Services.AuthAPI.Service.IService;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Mango.Services.AuthAPI.Service
 {
 	public class JwtTokenGenerator : IJwtTokenGenerator
 	{
 		private readonly JwtOptions _jwtOptions;
-		private readonly ILogger _logger;
 		private readonly int SEVEN_DAY = 7;
-        public JwtTokenGenerator(JwtOptions jwtOptions)
+        public JwtTokenGenerator(IOptions<JwtOptions> jwtOptions)
         {
-            _jwtOptions = jwtOptions;
+            _jwtOptions = jwtOptions.Value;
         }
         public string GenerateToken(ApplicationUser applicationUser)
 		{
