@@ -11,13 +11,29 @@ namespace Mango.Services.AuthAPI.Service
 		private readonly AppDbContext _db;
 		private readonly UserManager<ApplicationUser> _userManager;
 		private readonly RoleManager<IdentityRole> _roleManager;
+		private readonly IJwtTokenGenerator _jwtTokenGenerator;
 
-		//token action yazılacak
-		public AuthService(AppDbContext db, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+		public AuthService(AppDbContext db, IJwtTokenGenerator jwtTokenGenerator, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
 		{
 			_db = db;
+			_jwtTokenGenerator = jwtTokenGenerator;
 		    _userManager = userManager;
 		    _roleManager = roleManager;
+		}
+
+		public async Task<bool> AssingRole(string email, string roleName)
+		{
+			var user = _db.ApplicationUsers.FirstOrDefault(u => u.Email.ToLower() == email.ToLower());
+			if(user != null)
+			{
+				if (!_roleManager.RoleExistsAsync(roleName).GetAwaiter().GetResult())
+				{
+					_roleManager.CreateAsync(new IdentityRole(roleName)).GetAwaiter().GetResult();
+				}
+				await _userManager.AddToRoleAsync(user, roleName);
+				return true;
+			}
+			return false;
 		}
 
 		public async Task<LoginResponseDto> Login(LoginRequestDto loginRequestDto)
@@ -27,9 +43,10 @@ namespace Mango.Services.AuthAPI.Service
 
 			if(user == null || isValid == false)
 			{
-				return new LoginResponseDto() { User = null, Token = "" };
+				return new LoginResponseDto() { User = null, Token = string.Empty };
 			}
 
+			var token = _jwtTokenGenerator.GenerateToken(user);
 
 			UserDto userDto = new()
 			{
@@ -42,7 +59,7 @@ namespace Mango.Services.AuthAPI.Service
 			LoginResponseDto loginResponseDto = new LoginResponseDto()
 			{
 				User = userDto,
-				Token = string.Empty
+				Token = token
 			};
 			return loginResponseDto;
 		}

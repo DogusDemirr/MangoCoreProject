@@ -1,7 +1,12 @@
-﻿namespace Mango.Services.AuthAPI.Models.Dto
+﻿namespace Mango.Web.Models
 {
-	public class RegisterationRequestDto
+	public class UserDto
 	{
+		/// <summary>
+		/// ID
+		/// </summary>
+		public int ID { get; set; }
+
 		/// <summary>
 		/// Email
 		/// </summary>
@@ -16,15 +21,5 @@
 		/// PhoneNumber
 		/// </summary>
 		public string PhoneNumber { get; set; }
-
-		/// <summary>
-		/// Password
-		/// </summary>
-		public string Password { get; set; }
-
-		/// <summary>
-		/// Role
-		/// </summary>
-		public string? Role { get; set; }	
 	}
 }
