@@ -1,12 +1,16 @@
-﻿namespace Mango.Web.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Mango.Web.Models
 {
 	public class LoginRequestDto
 	{
+		[Required]
 		/// <summary>
 		/// UserName
 		/// </summary>
         public string UserName { get; set; }
 
+		[Required]
 		/// <summary>
 		/// Password
 		/// </summary>
